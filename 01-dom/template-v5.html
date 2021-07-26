@@ -10,9 +10,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 	<div id="app">
-		<h1>{{ title }}</h1>
+		<h1 v-once>{{ title }}</h1>
 		<p>{{ welcome() }}</p>
-		<a v-bind:href="link"> {{ link }} </a>
+		<p v-html="linkHTML"></p>
 	</div>
 
 	<script>
@@ -20,11 +20,11 @@
 			el: '#app',
 			data: {
 				title: 'Using VueJS',
-				link: 'https://google.com/'
+				linkHTML: '<a href="https://google.com/">Google</a>'
 			},
 			methods: {
 				welcome: function() {
-					return this.title
+					return this.title = 'good morning';
 				}
 			}
 		});
