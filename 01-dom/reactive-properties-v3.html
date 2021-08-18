@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+	<input type="text" v-model="title">
+	<h1> {{ title }} </h1>
+	<button @click="count++"> add </button>
+	<button @click="count2++"> addd </button>
+	<button @click="count--"> remove </button>
+	<p> Count: {{ count }} | {{ count2 }} </p>
+	<p> Result: {{ result }} </p>
+</div>
+
+<script>
+	const vm = new Vue({
+		el: "#app",
+		data: {
+			title: '',
+			count: 0,
+			count2: 0,
+		},
+		watch: {
+			count(n, o) {
+				setTimeout(() => {
+					this.count = 0
+				}, 2000)
+			}
+		},
+		computed: {
+			result() {
+				return this.count >= 5 ?
+					'5+' : '5-'
+			}
+		},
+		methods: {
+		}
+	});
+</script>
