@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>v-model VueJS</title>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+	<div id="app">
+		<h1> {{ title }} </h1>
+		<input type="text" v-model="title">
+	</div>
+
+	<script>
+		const vm = new Vue({
+			el: "#app",
+			data: {
+				title: 'Ala',
+			},
+			methods: {
+			}
+		});
+	</script>
+
+</body>
+
+</html>
