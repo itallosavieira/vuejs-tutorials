@@ -1,0 +1,21 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="challenge">
+    <!-- 1) show alert when button click -->
+    <div>
+        <button v-on:click="showAlert">Show Alert</button>
+    </div>
+
+    <!-- 2) get value when keydown - event.target.value -->
+    <div>
+        <input type="text" v-on:keydown="updateValue">
+        <p>{{ value }}</p>
+    </div>
+
+    <!-- 3) keydown when enter -->
+    <div>
+        <input type="text" v-on:keydown.enter="updateValue">
+        <p>{{ value }}</p>
+    </div>
+</div>
+<script src="app.js"></script>
