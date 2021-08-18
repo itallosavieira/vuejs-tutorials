@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Events VueJS</title>
+</head>
+
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+	<div id="app">
+		<h1>{{ title }}</h1>
+		<h2> {{ counter }}</h2>
+		<button v-on:click="incrementFive(105)"> + </button>
+		<button v-on:click="resetNumber"> reset </button>
+		<p v-on:mousemove="getMouseEvent">
+			x: {{ xEvent }} y: {{ yEvent }}
+			<span v-on:mousemove.stop=""> Stop !!!! </span>
+		</p>
+		<input type="text" v-on:keyup.enter="showAlert">
+
+	</div>
+
+	<script>
+		const vm = new Vue({
+			el: "#app",
+			data: {
+				title: "Counter",
+				counter: 0,
+				xEvent: 0,
+				yEvent: 0,
+			},
+			methods: {
+				incrementFive(n) {
+					this.counter += n;
+				},
+				resetNumber() {
+					this.counter = 0;
+				},
+				getMouseEvent(event) {
+					this.xEvent = event.clientX;
+					this.yEvent = event.clientY;
+				},
+				showAlert() {
+					window.alert('Alalalalala Aleeert!!!')
+				}
+			}
+		});
+	</script>
+
+</body>
+
+</html>
