@@ -75,10 +75,7 @@
 			const temp = setInterval(() => {
 				value += 5
 				this.width = `${value}%`
-				if (value == 100) {
-					clearInterval(temp)
-					window.alert("100%")
-				}
+				if (value == 100) clearInterval(temp)
 			}, 250)
 		},
 		setRight() {

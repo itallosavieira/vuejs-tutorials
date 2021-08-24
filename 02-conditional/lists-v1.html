@@ -1,0 +1,22 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <p v-if="logged">User Logged: {{ name }}</p>
+	<p v-else> None </p>
+	<button @click="logged = !logged"> {{ !logged ? 'login' : 'logout' }} </button>
+	<hr>
+	<p v-show="logged"> Hey v-show! </p>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			name: 'Itallo',
+			logged: false
+		}
+	})
+</script>
+
+<style>
+</style>
