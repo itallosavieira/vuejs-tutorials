@@ -2,7 +2,7 @@
 
 <div id="app">
 	<ul>
-		<li v-for="color in colors"> {{ color }}</li>
+		<li v-for="(color, i) in colors"> {{ i + 1 }}) {{ color }}</li>
 	</ul>
 </div>
 
@@ -17,4 +17,7 @@
 </script>
 
 <style>
+	ul {
+		list-style: none;
+	}
 </style>
