@@ -15,8 +15,12 @@
 	########## Hero Name ##########
 	-->
 	<div class="login-area" v-if="!game.start">
-		<input autofocus placeholder="Your Hero's Name" v-model="hero.name" @keydown.enter="game.start = true"
-			type="text" name="userName">
+		<input autofocus
+				placeholder="Your Hero's Name"
+				v-model="hero.name"
+				@keydown.enter="game.start = true"
+				type="text" name="userName">
+
 		<button v-if="hero.name" @click="game.start = true"> start </button>
 	</div>
 
@@ -41,12 +45,10 @@
 		</div>
 	</section>
 
-
 	<section v-if="game.start" class="actions-area">
 		<button @click="handleAction(action)" :class="`action${i}`" v-for="(action, i) in actions"> {{ action }}
 		</button>
 	</section>
-
 
 	<section class="status">
 		<div class="action-message" v-if="game.action">
