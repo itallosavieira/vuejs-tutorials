@@ -1,0 +1,217 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+	<!--
+	########## Title ##########
+	-->
+	<h1 v-if="!game.start" class="title">
+		{{ game.name }}
+	</h1>
+	<h1 v-if="game.start" class="title">
+		Turn: {{ game.turn }}
+	</h1>
+
+	<!--
+	########## Hero Name ##########
+	-->
+	<div v-if="!game.start">
+		<label for="userName">Your Hero's name:</label>
+		<input v-model="hero.name" @keydown.enter="game.start = true" type="text" name="userName">
+		<button v-if="hero.name" @click="game.start = true"> start </button>
+	</div>
+
+	<!--
+	########## Game ##########
+	-->
+	<section v-if="game.start" class="players-area">
+		<div class="player">
+			<h2> {{ hero.name }} </h2>
+			<div class="progress-bar">
+				<div class="progress" :style="{width: `${hero.life}%`}"> {{ hero.life }}% </div>
+			</div>
+		</div>
+
+		<div class="player">
+			<h2> {{ enemy.name }} </h2>
+			<div class="progress-bar">
+				<div class="progress" :style="{width: `${enemy.life}%`}"> {{ enemy.life }}% </div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="actions-area">
+		<button @click="handleAction(action)" :class="`action${i}`" v-for="(action, i) in actions"> {{ action }}
+		</button>
+	</section>
+
+
+	<section class="status">
+		<div class="action-message" v-if="game.action">
+			<h3> {{ }}</h3>
+		</div>
+	</section>
+</div>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			game: {
+				name: 'Monster Slayer Game',
+				start: false,
+				action: false,
+				randomNumber: Math.round(Math.random() * 10),
+				turn: 0,
+			},
+			hero: {
+				name: 'Hero',
+				life: 100
+			},
+			enemy: {
+				name: 'Ugly Monster',
+				life: 100
+			},
+			actions: [
+				'attack',
+				'super-attack',
+				'mana',
+				'exit'
+			]
+		},
+		methods: {
+			showMessage(value) {
+				this.game.action = true;
+				console.log(value);
+				setTimeout(() => {
+					this.game.action = false;
+				}, 500);
+			},
+			isLife() {
+				if (this.hero.life >= 100 || this.enemy.life >= 100)
+					return false;
+				if (this.hero.life <= 0 || this.enemy.life <= 0)
+					return false;
+				return true;
+			},
+			handleAttack() {
+				this.enemy.life -= this.game.randomNumber;
+				this.hero.life -= this.game.randomNumber + 2;
+
+			},
+			handleSuperAttack() {
+				this.enemy.life -= this.game.randomNumber;
+				this.hero.life -= this.game.randomNumber - 2;
+			},
+			handleMana() {
+				this.hero.life += this.game.randomNumber - 2;
+			},
+			handleExit() {
+				location.reload();
+			},
+			handleAction(value) {
+				if (value == 'attack') this.handleAttack();
+				if (value == 'super-attack') this.handleSuperAttack();
+				if (value == 'mana') this.handleMana();
+				if (value == 'exit') this.handleExit();
+				this.isLife();
+				this.showMessage(value);
+			}
+		}
+	})
+</script>
+
+<style>
+	#app {
+		padding: 1rem;
+		min-width: 350px;
+		max-width: 1200px;
+		margin: 0 auto;
+		text-align: center;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+
+	.players-area {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 3rem;
+	}
+
+	.player {
+		width: 100%;
+	}
+
+	.player h2 {
+		font-size: 2.5rem;
+	}
+
+	.progress-bar {
+		width: 100%;
+		height: 3.5rem;
+		box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(53, 35, 35, 0.10) 0px 15px 12px;
+		border: 1px solid rgb(77, 224, 40);
+		border-radius: 5px;
+		font-size: 3rem;
+	}
+
+	.progress {
+		background-color: rgb(77, 224, 40);
+		height: 100%;
+	}
+
+	.actions-area {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		padding: 3rem 0;
+	}
+
+	.actions-area button {
+		cursor: pointer;
+		color: #fff;
+		font-size: 1.25rem;
+		height: auto;
+		border: 1px solid transparent;
+		border-radius: 5px;
+		padding: .5rem;
+		text-transform: capitalize;
+		box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.10) 0px 15px 12px;
+		transition: .2s;
+	}
+
+	.actions-area button:hover {
+		box-shadow: none;
+	}
+
+	.actions-area button:active {
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	}
+
+	.action0 {
+		background-color: blue;
+	}
+
+	.action1 {
+		background-color: orange;
+	}
+
+	.action2 {
+		background-color: hotpink;
+	}
+
+	.action3 {
+		background-color: red;
+	}
+
+	.action-message {
+		top: 0;
+		left: 0;
+		z-index: 9;
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		background-color: #000;
+		opacity: .5;
+	}
+</style>
