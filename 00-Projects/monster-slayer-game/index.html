@@ -27,14 +27,14 @@
 		<div class="player">
 			<h2> {{ hero.name }} </h2>
 			<div class="progress-bar">
-				<div class="progress" :style="{width: `${hero.life}%`}"> {{ hero.life }}% </div>
+				<div class="progress" :style="{width: `${isLife(hero.life)}%`, backgroundColor: hero.background}"> {{ isLife(hero.life) }}% </div>
 			</div>
 		</div>
 
 		<div class="player">
 			<h2> {{ enemy.name }} </h2>
 			<div class="progress-bar">
-				<div class="progress" :style="{width: `${enemy.life}%`}"> {{ enemy.life }}% </div>
+				<div class="progress" :style="{width: `${isLife(enemy.life)}%`, backgroundColor: enemy.background}"> {{ isLife(enemy.life) }}% </div>
 			</div>
 		</div>
 	</section>
@@ -48,7 +48,10 @@
 
 	<section class="status">
 		<div class="action-message" v-if="game.action">
-			<h3> {{ }}</h3>
+			<h3> {{ game.message }}</h3>
+			<div>
+
+			</div>
 		</div>
 	</section>
 </div>
@@ -61,16 +64,18 @@
 				name: 'Monster Slayer Game',
 				start: false,
 				action: false,
-				randomNumber: Math.round(Math.random() * 10),
 				turn: 0,
+				message: ''
 			},
 			hero: {
 				name: 'Hero',
-				life: 100
+				life: 100,
+				background: 'rgb(77, 224, 40)'
 			},
 			enemy: {
 				name: 'Ugly Monster',
-				life: 100
+				life: 100,
+				background: 'rgb(77, 224, 40)'
 			},
 			actions: [
 				'attack',
@@ -82,29 +87,33 @@
 		methods: {
 			showMessage(value) {
 				this.game.action = true;
-				console.log(value);
+				this.game.message = value;
 				setTimeout(() => {
 					this.game.action = false;
-				}, 500);
+				}, 600);
 			},
-			isLife() {
-				if (this.hero.life >= 100 || this.enemy.life >= 100)
-					return false;
-				if (this.hero.life <= 0 || this.enemy.life <= 0)
-					return false;
-				return true;
+			isLife(value) {
+				if (value > 100)
+					return 100;
+				if (value < 0)
+					return 0;
+				if (value < 20)
+					this.game.background = 'rgb(224, 40, 40)';
+				return value;
+			},
+			getDamage() {
+				return Math.round(Math.random() * 10);
 			},
 			handleAttack() {
-				this.enemy.life -= this.game.randomNumber;
-				this.hero.life -= this.game.randomNumber + 2;
-
+				this.enemy.life -= this.getDamage();
+				this.hero.life -= (this.getDamage() + 2);
 			},
 			handleSuperAttack() {
-				this.enemy.life -= this.game.randomNumber;
-				this.hero.life -= this.game.randomNumber - 2;
+				this.enemy.life -= (this.getDamage() + 4);
+				this.hero.life -= this.getDamage();
 			},
 			handleMana() {
-				this.hero.life += this.game.randomNumber - 2;
+				this.hero.life += this.getDamage();
 			},
 			handleExit() {
 				location.reload();
@@ -114,7 +123,7 @@
 				if (value == 'super-attack') this.handleSuperAttack();
 				if (value == 'mana') this.handleMana();
 				if (value == 'exit') this.handleExit();
-				this.isLife();
+				this.game.turn++;
 				this.showMessage(value);
 			}
 		}
@@ -150,13 +159,12 @@
 		width: 100%;
 		height: 3.5rem;
 		box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(53, 35, 35, 0.10) 0px 15px 12px;
-		border: 1px solid rgb(77, 224, 40);
+		border: 2px solid #000;
 		border-radius: 5px;
 		font-size: 3rem;
 	}
 
 	.progress {
-		background-color: rgb(77, 224, 40);
 		height: 100%;
 	}
 
@@ -212,6 +220,14 @@
 		width: 100vw;
 		height: 100vh;
 		background-color: #000;
-		opacity: .5;
+		opacity: .9;
+		transition: 1s;
+	}
+
+	.action-message h3 {
+		color: #fff;
+		font-size: 5rem;
+		text-transform: capitalize;
+		margin-top: 40vh;
 	}
 </style>
