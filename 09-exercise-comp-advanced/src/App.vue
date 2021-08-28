@@ -7,7 +7,9 @@
 		</span>
 
 		<keep-alive>
-			<component :is="componente">Componente {{ componente }}</component>
+			<component :is="componente">
+				<div slot="texto">Componente <strong>{{ componente }}</strong></div>
+			</component>
 		</keep-alive>
 	</div>
 </template>
