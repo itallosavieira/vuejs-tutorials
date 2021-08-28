@@ -3,11 +3,15 @@
         <h2>As Informações de Usuário</h2>
         <p>Vários detalhes...</p>
         <p>Nome do Usuario: <strong>{{ inverterNome() }}</strong></p>
+        <p>Idade do Usuario <strong>{{ idade }}</strong></p>
         <button @click="reiniciarNome">Reiniciar Nome</button>
+        <button @click="reiniciarFn()">Reiniciar Nome (Callback)</button>
     </div>
 </template>
 
 <script>
+import bus from '@/bus'
+
 export default {
     props: {
         nome: {
@@ -17,16 +21,22 @@ export default {
             //}
             // required: true
             default: 'Anonimo'
-        }
+        },
+        reiniciarFn: Function,
+        idade: Number
     },
     methods: {
         inverterNome() {
             return this.nome.split('').reverse().join('')
         },
         reiniciarNome() {
-            this.nome = 'Itallo'
-            this.$emit('nomeMudou', this.nome)
+            this.$emit('nomeMudou', 'Itallo')
         }
+    },
+    created() {
+        bus.quandoIdadeMudar(idade => {
+            this.idade = idade
+        })
     }
 }
 </script>
