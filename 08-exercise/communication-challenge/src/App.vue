@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<usuario-lista :usuarios="usuarios" />
+		<usuario-lista :users="users" />
 		<usuario-detalhe />
 	</div>
 </template>
@@ -14,7 +14,7 @@ export default {
 	components: { UsuarioLista, UsuarioDetalhe },
     data() {
         return {
-            usuarios: [
+            users: [
                 { id: 1, nome: 'Ana', idade: 31 },
                 { id: 2, nome: 'Carlos', idade: 22 },
                 { id: 3, nome: 'Daniel', idade: 40 },
