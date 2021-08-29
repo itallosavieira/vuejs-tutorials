@@ -22,6 +22,7 @@ export default {
 	data() {
 		return {
 			title: 'Tasks',
+			tasks: [],
 		}
 	},
 	methods: {
@@ -38,7 +39,8 @@ export default {
 	}
 	body {
 		font-family: 'Lato', sans-serif;
-		background-color: #f5f7fb;
+		background: rgb(255,255,255);
+		background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(231,231,255,1) 35%, rgba(213,248,255,1) 100%);
 		color: #413D55;
 	}
 
