@@ -1,5 +1,6 @@
 <template>
-	<div class="new-task">
+	<div
+		class="new-task">
 		<input
 			v-model="name"
 			@keydown.enter="add"
