@@ -1,12 +1,19 @@
 <template>
 	<div id="app">
 		<h1>Diretivas</h1>
+		<hr>
+		<p v-destaque:bg="color" v-text="'teste teste teste'"></p>
+		<p v-destaque.delay="color" v-text="'teste teste teste'"></p>
 	</div>
 </template>
 
 <script>
 export default {
-	
+	data() {
+		return {
+			color: 'lightgreen'
+		}
+	}
 }
 </script>
 
