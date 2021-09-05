@@ -3,7 +3,7 @@
 		<h1>Diretivas</h1>
 		<hr>
 		<p v-destaque:bg="color" v-text="'teste teste teste'"></p>
-		<p v-destaque.delay="color" v-text="'teste teste teste'"></p>
+		<p v-destaque.alternate.delay="color" v-text="'teste teste teste'"></p>
 	</div>
 </template>
 
