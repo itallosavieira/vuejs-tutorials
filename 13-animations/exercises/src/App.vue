@@ -11,6 +11,12 @@
 				variant="info" show
 				v-if="show">{{ message }}</b-alert>
 		</transition>
+
+		<transition name="slide">
+			<b-alert
+				variant="info" show
+				v-if="show">{{ message }}</b-alert>
+		</transition>
 	</div>
 </template>
 
@@ -37,22 +43,30 @@ export default {
 	font-size: 1.5rem;
 }
 
-.fade-enter {
-
+.fade-enter, .fade-leave-to {
+	opacity: 0;
 }
-.fade-enter-active {
 
+.fade-enter-active, .fade-leave-active {
+	transition: opacity 2s;
 }
-.fade-enter-to {
 
+@keyframes slide-in {
+	from { transform: translateY(40px); }
+	to { transform: translateY(0); }
 }
-.fade-leave {
 
+@keyframes slide-out {
+	from { transform: translateY(0); }
+	to { transform: translateY(40px); }
 }
-.fade-leave-active {
 
+.slide-enter-active {
+	animation: slide-in 2s ease;
 }
-.fade-leave-to {
 
+.slide-leave-active {
+	animation: slide-out 2s ease;
 }
+
 </style>
