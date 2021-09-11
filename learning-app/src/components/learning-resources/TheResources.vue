@@ -1,13 +1,15 @@
 <template>
-	<base-card>
+	<base-card class="flex">
 		<base-button
 			@click="setSelectedTab('stored-resources')"
-			:mode="storedResButtonMode">
+			:mode="storedResButtonMode"
+		>
 			Stored Resources
 		</base-button>
 		<base-button
 			@click="setSelectedTab('add-resource')"
-			:mode="addResButtonMode">
+			:mode="addResButtonMode"
+		>
 			Add Resource
 		</base-button>
 	</base-card>
@@ -17,13 +19,13 @@
 </template>
 
 <script>
-import StoredResources from './StoredResources.vue'
-import AddResource from './AddResource.vue'
+import StoredResources from './StoredResources.vue';
+import AddResource from './AddResource.vue';
 
 export default {
 	components: {
 		StoredResources,
-		AddResource
+		AddResource,
 	},
 	data() {
 		return {
@@ -47,16 +49,16 @@ export default {
 	provide() {
 		return {
 			resources: this.storedResources,
-			addResource: this.addResource
-		}
+			addResource: this.addResource,
+		};
 	},
 	computed: {
 		storedResButtonMode() {
-			return this.selectedTab === 'stored-resources' ? null : 'flat'
+			return this.selectedTab === 'stored-resources' ? null : 'flat';
 		},
 		addResButtonMode() {
-			return this.selectedTab === 'add-resource' ? null : 'flat'
-		}
+			return this.selectedTab === 'add-resource' ? null : 'flat';
+		},
 	},
 	methods: {
 		setSelectedTab(tab) {
@@ -67,14 +69,19 @@ export default {
 				id: new Date().toISOString(),
 				title: title,
 				description: description,
-				link: url
+				link: url,
 			};
 			this.storedResources.unshift(newResource);
-			this.selectedTab = 'stored-resources'
-		}
+			this.selectedTab = 'stored-resources';
+		},
 	},
 };
 </script>
 
-<style>
+<style scopes>
+.flex {
+	display: flex;
+	justify-content: center;
+	gap: 2.5rem;
+}
 </style>
