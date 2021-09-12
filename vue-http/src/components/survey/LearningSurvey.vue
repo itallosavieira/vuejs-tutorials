@@ -83,21 +83,6 @@ export default {
 			this.enteredName = '';
 			this.chosenRating = null;
 		},
-		loadExperiences() {
-			fetch(
-				'https://vue-course-f86a2-default-rtdb.firebaseio.com/surveys.json',
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						name: this.enteredName,
-						rating: this.chosenRating,
-					}),
-				}
-			);
-		},
 	},
 };
 </script>
