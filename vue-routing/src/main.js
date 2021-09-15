@@ -2,7 +2,9 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import TeamsList from './components/teams/TeamsList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
+import TeamsFooter from './components/teams/TeamsFooter.vue'
 import UsersList from './components/users/UsersList.vue';
+import UsersFooter from './components/users/UsersFooter.vue'
 
 import App from './App.vue';
 
@@ -12,12 +14,12 @@ const router = createRouter({
 		{
 			name: 'users',
 			path: '/users/',
-			component: UsersList
+			components: { default: UsersList, footer: UsersFooter },
 		},
 		{
 			name: 'teams',
 			path: '/teams',
-			component: TeamsList,
+			components: { default: TeamsList, footer: TeamsFooter },
 			alias: '/',
 			children: [
 				{
