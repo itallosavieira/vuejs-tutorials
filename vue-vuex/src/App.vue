@@ -4,7 +4,7 @@
 		<button @click="increment">increment</button>
 		<button @click="increase({ value: 10 })">increase</button>
 	</base-container>
-	<base-container>
+	<base-container title="Auth">
 		<user-auth></user-auth>
 	</base-container>
 </template>
@@ -22,10 +22,10 @@ export default {
 		UserAuth,
 	},
 	methods: {
-		...mapActions(['increment', 'increase']),
+		...mapActions('numbers', ['increment', 'increase']),
 	},
 	computed: {
-		...mapGetters(['userIsAuthenticated']),
+		...mapGetters('auth', ['userIsAuthenticated']),
 	},
 };
 </script>
