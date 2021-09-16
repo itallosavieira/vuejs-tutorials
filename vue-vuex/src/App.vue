@@ -1,14 +1,15 @@
 <template>
 	<base-container title="Vuex">
 		<the-counter></the-counter>
-		<button @click="addOne">Add 1</button>
-		<button @click="addTen">Add 10</button>
+		<button @click="increment">increment</button>
+		<button @click="increase({ value: 10 })">increase</button>
 	</base-container>
 </template>
 
 <script>
 import BaseContainer from './components/BaseContainer.vue';
 import TheCounter from './components/TheCounter.vue';
+import { mapActions } from 'vuex';
 
 export default {
 	components: {
@@ -16,15 +17,7 @@ export default {
 		TheCounter,
 	},
 	methods: {
-		addOne() {
-			this.$store.dispatch('increment');
-		},
-		addTen() {
-			this.$store.dispatch({
-				type: 'increase',
-				value: 10,
-			});
-		},
+		...mapActions(['increment', 'increase']),
 	},
 };
 </script>
