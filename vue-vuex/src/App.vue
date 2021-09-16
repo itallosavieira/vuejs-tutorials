@@ -17,10 +17,10 @@ export default {
 	},
 	methods: {
 		addOne() {
-			this.$store.commit('increment');
+			this.$store.dispatch('increment');
 		},
 		addTen() {
-			this.$store.commit({
+			this.$store.dispatch({
 				type: 'increase',
 				value: 10,
 			});
