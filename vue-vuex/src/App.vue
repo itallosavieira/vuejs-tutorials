@@ -1,23 +1,31 @@
 <template>
-	<base-container title="Vuex">
+	<base-container title="Vuex" v-if="userIsAuthenticated">
 		<the-counter></the-counter>
 		<button @click="increment">increment</button>
 		<button @click="increase({ value: 10 })">increase</button>
+	</base-container>
+	<base-container>
+		<user-auth></user-auth>
 	</base-container>
 </template>
 
 <script>
 import BaseContainer from './components/BaseContainer.vue';
 import TheCounter from './components/TheCounter.vue';
-import { mapActions } from 'vuex';
+import UserAuth from './components/UserAuth.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	components: {
 		BaseContainer,
 		TheCounter,
+		UserAuth,
 	},
 	methods: {
 		...mapActions(['increment', 'increase']),
+	},
+	computed: {
+		...mapGetters(['userIsAuthenticated']),
 	},
 };
 </script>
