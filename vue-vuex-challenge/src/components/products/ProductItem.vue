@@ -28,7 +28,7 @@ export default {
 				image: this.image,
 				title: this.title,
 				price: this.price,
-			});
+			}); 
 		},
 	},
 };
