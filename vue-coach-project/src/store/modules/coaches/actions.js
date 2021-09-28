@@ -14,14 +14,22 @@ export default {
 			body: JSON.stringify(coachData)
 		});
 
-		await response.json();
+		// await response.json();
+
+		if(!response.ok) {
+			// error...
+		}
 
 		context.commit('registerCoach', {
 			...coachData,
 			id: userId
-		})
+		});
 	},
 	async loadCoaches(context) {
+		if (context.getters.shouldUpdate) {
+			return;
+		}
+
 		const response = await fetch(`https://vue-test-f3770-default-rtdb.firebaseio.com/coaches.json`);
 
 		const responseData = await response.json();
@@ -34,7 +42,8 @@ export default {
 		const coaches = [];
 
 		for (const key in responseData) {
-			const coach = {		
+			const coach = {	
+				id: key,	
 				firstName: responseData[key].firstName,
 				lastName: responseData[key].lastName,
 				description: responseData[key].description,
@@ -45,5 +54,6 @@ export default {
 		}
 		
 		context.commit('setCoaches', coaches);
+		context.commit('setFetchTimestamp');
 	}
 };
