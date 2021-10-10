@@ -16,7 +16,7 @@ export default {
 
 		// await response.json();
 
-		if(!response.ok) {
+		if (!response.ok) {
 			// error...
 		}
 
@@ -30,7 +30,7 @@ export default {
 			return;
 		}
 
-		const response = await fetch(`https://vue-test-f3770-default-rtdb.firebaseio.com/coaches.jso`);
+		const response = await fetch(`https://vue-test-f3770-default-rtdb.firebaseio.com/coaches.json`);
 
 		const responseData = await response.json();
 
@@ -42,8 +42,8 @@ export default {
 		const coaches = [];
 
 		for (const key in responseData) {
-			const coach = {	
-				id: key,	
+			const coach = {
+				id: key,
 				firstName: responseData[key].firstName,
 				lastName: responseData[key].lastName,
 				description: responseData[key].description,
@@ -52,7 +52,7 @@ export default {
 			};
 			coaches.push(coach);
 		}
-		
+
 		context.commit('setCoaches', coaches);
 		context.commit('setFetchTimestamp');
 	}
